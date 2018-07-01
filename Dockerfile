@@ -1,5 +1,7 @@
-FROM python:2.7-stretch
+FROM python:2.7-slim
 MAINTAINER Quan Hua <quanhua92@gmail.com>
+
+RUN apt-get update && apt-get install -qq -y build-essential libpq-dev --fix-missing --no-install-recommends
 
 ENV INSTALL_PATH /mobydock
 RUN mkdir -p $INSTALL_PATH
