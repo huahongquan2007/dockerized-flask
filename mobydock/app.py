@@ -6,6 +6,8 @@ from flask_redis import FlaskRedis
 from redis import StrictRedis
 from sqlalchemy.sql.expression import func
 
+import socket
+
 
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.INFO)
@@ -51,8 +53,9 @@ def index():
         feed_count = redis_store.get('feed_count')
         if feed_count is None:
             feed_count = 0
+    hostname = socket.gethostname()
 
-    return render_template('layout.html', message=random_message, feed_count=feed_count)
+    return render_template('layout.html', message=random_message, feed_count=feed_count, hostname=hostname)
 
 
 @page.route('/seed')
